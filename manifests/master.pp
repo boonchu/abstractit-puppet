@@ -127,6 +127,9 @@ class puppet::master (
   $module_path                        = undef,
   $pre_module_path                    = undef,
   $r10k_version                       = undef,
+  $reports                            = 'store,foreman',
+  $external_nodes                     = '/etc/puppet/node.rb',
+  $node_terminus                      = 'exec',
 ) inherits ::puppet::defaults {
 
   #input validation

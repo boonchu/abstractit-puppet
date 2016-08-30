@@ -19,6 +19,9 @@ class puppet::master::config {
   $report_clean_hour    = $puppet::master::report_clean_hour
   $report_clean_min     = $puppet::master::report_clean_min
   $report_clean_weekday = $puppet::master::report_clean_weekday
+  $reports              = $puppet::master::reports
+  $external_nodes       = $puppet::master::external_nodes
+  $node_terminus        = $puppet::master::node_terminus
 
   if ($ca_server != undef) {
     if ($ca_server == $::fqdn) {
@@ -118,14 +121,38 @@ class puppet::master::config {
       setting => 'parser',
       value   => 'future'
     }
-  } else {
-    # disable future parser
-    ini_setting { 'master parser':
-      ensure  => absent,
+  }
+
+  if $reports {
+    # enable puppet reports
+    ini_setting { 'master reports':
+      ensure  => present,
       path    => "${confdir}/puppet.conf",
       section => 'master',
-      setting => 'parser',
-      value   => 'future'
+      setting => 'reports',
+      value   => $reports,
+    }
+  }
+
+  if $external_nodes {
+    # enable puppet reports
+    ini_setting { 'master ENC':
+      ensure  => present,
+      path    => "${confdir}/puppet.conf",
+      section => 'master',
+      setting => 'external_nodes',
+      value   => $external_nodes,
+    }
+  }
+
+  if $node_terminus {
+    # enable node terminus
+    ini_setting { 'master node termninus':
+      ensure  => present,
+      path    => "${confdir}/puppet.conf",
+      section => 'master',
+      setting => 'node_terminus',
+      value   => $node_terminus,
     }
   }
 
