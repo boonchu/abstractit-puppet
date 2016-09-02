@@ -152,6 +152,9 @@ class puppet::profile::master (
   $puppetdb_listen_port               = '8080',
   $puppetdb_ssl_listen_port           = '8081',
   $puppet_service_name                = $server_type,
+  $manage_enc                         = true,
+  $external_nodes                     = '/etc/puppet/node.rb',
+  $node_terminus                      = 'exec',
 ) {
   class { '::puppet::master':
     autosign                           => $autosign,
@@ -187,6 +190,9 @@ class puppet::profile::master (
     server_version                     => $server_version,
     server_type                        => $server_type,
     puppet_version                     => $puppet_version,
+    manage_enc                         => $manage_enc,
+    external_nodes                     => $external_nodes,
+    node_terminus                      => $node_terminus,
   }
 
   case $puppetdb_use_ssl {
