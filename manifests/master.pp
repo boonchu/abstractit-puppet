@@ -186,7 +186,7 @@ class puppet::master (
   }
 
   # check autosign methods
-  $autosign_methods = ['off','on','file']
+  $autosign_methods = ['off','on','file','/usr/local/bin/autosign']
   validate_re($autosign_method,$autosign_methods)
 
   # set autosign_method_interpolated to on if autosign is true
