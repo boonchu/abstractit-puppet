@@ -45,7 +45,7 @@ class puppet::master::config {
 
   # setup autosign and autosign file
   case $autosign_method {
-    default,'file': {
+    default: {
       $autosign_value = $autosign_file
     }
     'off': {
