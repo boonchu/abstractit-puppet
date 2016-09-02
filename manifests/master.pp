@@ -127,6 +127,7 @@ class puppet::master (
   $module_path                        = undef,
   $pre_module_path                    = undef,
   $r10k_version                       = undef,
+  $manage_enc                         = true,
   $reports                            = 'store,foreman',
   $external_nodes                     = '/etc/puppet/node.rb',
   $node_terminus                      = 'exec',
